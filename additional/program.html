@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учебный план | ЭУМК</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .fullscreen-plan {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .plan-image-container {
+            max-width: 100%;
+            max-height: 100%;
+            position: relative;
+        }
+        
+        .plan-image {
+            max-width: 100%;
+            max-height: calc(100vh - 100px);
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: var(--primary-hover);
+            transform: scale(1.1);
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .zoom-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .zoom-btn:hover {
+            background: var(--primary-hover);
+        }
+        
+        .thumbnail-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .instructions {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../index.html" class="logo-link">
+                    <span>ЭУМК</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <div class="nav-item">
+                    <a class="nav-link">Теоретический</a>
+                    <div class="glass-dropdown">
+                        <h3>Теоретический раздел</h3>
+                        <a href="../theory/presentations.html">Презентации</a>
+                        <a href="../theory/audio.html">Аудиоматериал</a>
+                        <a href="../theory/slovary.html">Англо-русский словарь</a>
+                        <a href="../theory/grammar.html">Грамматический материал</a>
+                        <a href="../theory/translate.html">Особенности технического перевода</a>
+                        <a href="../theory/phrases.html">Полезные фразы для обсуждения</a>
+                        <a href="../theory/table.html">Таблица неправильных глаголов</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link">Практический</a>
+                    <div class="dropdown glass-dropdown">
+                        <h3>Практический раздел</h3>
+                        <a href="../theme/practice.html">Темы</a>
+                        <a href="../theme/practicetests.html">Интерактивные упражнения</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link">Контроль знаний</a>
+                    <div class="dropdown glass-dropdown">
+                        <h3>Проверка знаний</h3>
+                        <a href="#tests">Контрольные работы</a>
+                        <a href="../control/control.html">Тематический контроль</a>
+                        <a href="../control/dkr.html">ДКР</a>
+                        <a href="../control/criteria.html">Критерии оценки</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link">Вспомогательный</a>
+                    <div class="dropdown glass-dropdown">
+                        <h3>Учебный план</h3>
+                        <a href="program.html">Учебная программа</a>
+                        <a href="ptp.html">ПТП</a>
+                        <a href="ktp.html">КТП</a>
+                        <a href="resources.html">Перечень учебных изданий</a>
+                    </div>
+                </div>
+            </div>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="section">
+            <div class="thumbnail-container">
+                <h1>Учебный план</h1>
+                <p>Программа обучения по предмету «Иностранный язык (профессиональная лексика)»</p>
+                
+                <img src="misc/учебный_план.jpg" alt="Учебный план" class="thumbnail" id="planThumbnail">
+                
+                <div class="instructions">
+                    <p>Нажмите на изображение для просмотра в полном размере</p>
+                </div>
+            </div>
+        </section>
+        
+        <div class="fullscreen-plan" id="fullscreenPlan" style="display: none;">
+            <div class="plan-image-container">
+                <button class="close-btn" id="closePlan">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="misc/учебный_план.jpg" alt="Учебный план" class="plan-image" id="fullPlanImage">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoomIn">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="zoom-btn" id="zoomOut">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="zoom-btn" id="zoomReset">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const thumbnail = document.getElementById('planThumbnail');
+            const fullscreen = document.getElementById('fullscreenPlan');
+            const fullImage = document.getElementById('fullPlanImage');
+            const closeBtn = document.getElementById('closePlan');
+            const zoomIn = document.getElementById('zoomIn');
+            const zoomOut = document.getElementById('zoomOut');
+            const zoomReset = document.getElementById('zoomReset');
+            
+            let scale = 1;
+            
+            // Открыть полноэкранный просмотр
+            thumbnail.addEventListener('click', function() {
+                fullscreen.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Закрыть полноэкранный просмотр
+            closeBtn.addEventListener('click', function() {
+                fullscreen.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                scale = 1;
+                fullImage.style.transform = 'scale(1)';
+            });
+            
+            // Управление масштабом
+            zoomIn.addEventListener('click', function() {
+                scale += 0.2;
+                fullImage.style.transform = `scale(${scale})`;
+            });
+            
+            zoomOut.addEventListener('click', function() {
+                if (scale > 0.5) {
+                    scale -= 0.2;
+                    fullImage.style.transform = `scale(${scale})`;
+                }
+            });
+            
+            zoomReset.addEventListener('click', function() {
+                scale = 1;
+                fullImage.style.transform = 'scale(1)';
+            });
+            
+            // Закрыть по клику вне изображения
+            fullscreen.addEventListener('click', function(e) {
+                if (e.target === fullscreen) {
+                    fullscreen.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    scale = 1;
+                    fullImage.style.transform = 'scale(1)';
+                }
+            });
+        });
+    </script>
+    <script src="../script.js"></script>
+</body>
+</html>
