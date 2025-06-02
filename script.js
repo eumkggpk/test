@@ -90,3 +90,43 @@ if (window.innerWidth <= 768) {
     element.style.transition = 'none';
   });
 }
+
+// Construction Gallery
+function initConstructionGallery() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    if (galleryItems.length === 0) return;
+    
+    let currentIndex = 0;
+    
+    function rotateGallery() {
+        galleryItems[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        galleryItems[currentIndex].classList.add('active');
+    }
+    
+    // Start rotation every 5 seconds
+    setInterval(rotateGallery, 5000);
+}
+
+// Video Player
+function initVideoPlayer() {
+    const videoPlaceholder = document.getElementById('constructionVideo');
+    if (!videoPlaceholder) return;
+    
+    videoPlaceholder.addEventListener('click', function() {
+        this.innerHTML = `
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/EXAMPLE_VIDEO_ID?autoplay=1" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+            gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `;
+        this.classList.add('video-loaded');
+    });
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initConstructionGallery();
+    initVideoPlayer();
+    
+    // Add construction terms section dynamically
+});
